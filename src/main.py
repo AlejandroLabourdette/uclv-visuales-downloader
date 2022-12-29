@@ -17,8 +17,11 @@ def get_links(html_doc: str):
 
         link_type = td0.img.get('alt')
         link = td1.a.get('href')
-        print(f'{link_type}, {link}')
+
+        yield f'{link_type}, {link}'
 
 
 
-get_links(html_doc1)
+generator = get_links(html_doc1)
+for i in generator:
+    print(i)
