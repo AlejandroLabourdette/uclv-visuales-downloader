@@ -1,18 +1,18 @@
 import urllib.request
 import urllib.parse
 
-from typing import Tuple
+from typing import Generator
 from bs4 import BeautifulSoup, element
 from constants import *
 
 
-def get_links(url: str, only_videos: bool, dir_to_save='') -> Tuple[ str, str, str]:
+def get_links(url: str, only_videos: bool, dir_to_save='') -> Generator[ str, str, str]:
     '''
     Generator that return all downloadable links under url.
 
     Returns (link_type, link, dir_to_save)
-    * link_type: is the kind of link (VID, IMG, TXT, etc)
-    * link: url of the file to be downloaded
+    * link: URL to the file
+    * file_name: name of the file to be downloaded
     * dir_to_save: relative path to the file unquoted
     '''
     html_doc = urllib.request.urlopen(url).read()
@@ -38,4 +38,6 @@ def get_links(url: str, only_videos: bool, dir_to_save='') -> Tuple[ str, str, s
         elif link_type in [VID, IMG, TXT]:
             if only_videos and link_type != VID:
                 continue
-            yield link_type, link, dir_to_save
+            url_to_file = url+link
+            file_name = urllib.parse.unquote(link)
+            yield url_to_file, file_name, dir_to_save

@@ -13,7 +13,7 @@ class DownloadProgressBar():
                 ' ', progressbar.ETA(),
                 ' ', progressbar.FileTransferSpeed(),
             ]
-            self.p_bar=progressbar.ProgressBar(maxval=total_size,widgets=widgets,term_width=70)
+            self.p_bar=progressbar.ProgressBar(maxval=total_size,widgets=widgets,term_width=100)
             self.p_bar.start()
 
         downloaded = block_num * block_size
