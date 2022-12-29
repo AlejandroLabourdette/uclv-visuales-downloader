@@ -1,5 +1,5 @@
 import urllib.request
-import io
+import sys
 
 from bs4 import BeautifulSoup, element
 from progress_bar import DownloadProgressBar as PB
@@ -26,8 +26,8 @@ def get_links(html_doc: str):
 
 
 
-
-urllib.request.urlretrieve(url2, 'video.mp4', PB()) 
+print('Downloading files:')
+urllib.request.urlretrieve(url2, 'video.mp4', PB('pepito')) 
 # generator = get_links(html_doc1)
 # for i in generator:
 #     print(i)
