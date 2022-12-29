@@ -1,6 +1,10 @@
-from bs4 import BeautifulSoup, element
-from examples import html_doc1
+import urllib.request
+import io
 
+from bs4 import BeautifulSoup, element
+from progress_bar import DownloadProgressBar as PB
+from examples_doc import html_doc1
+from examples_url import url1, url2
 
 def get_links(html_doc: str):
     soup = BeautifulSoup(html_doc, 'html.parser')
@@ -22,6 +26,8 @@ def get_links(html_doc: str):
 
 
 
-generator = get_links(html_doc1)
-for i in generator:
-    print(i)
+
+urllib.request.urlretrieve(url2, 'video.mp4', PB()) 
+# generator = get_links(html_doc1)
+# for i in generator:
+#     print(i)
