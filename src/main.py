@@ -27,9 +27,11 @@ def download(urls, onlyvideos):
 
             if not os.path.isdir(dir_to_save):
                 os.makedirs(dir_to_save)
+
+            click.echo(f'dwnlding: {relative_path}')
             urllib.request.urlretrieve(
                 url_to_file, relative_path, 
-                DownloadProgressBar(relative_path)) 
+                DownloadProgressBar()) 
 
 
 if __name__ == '__main__':

@@ -1,14 +1,13 @@
 import progressbar
 
 class DownloadProgressBar():
-    def __init__(self, file_name: str):
+    def __init__(self):
         self.p_bar: progressbar.ProgressBar = None
-        self.file_name = file_name
 
     def __call__(self, block_num, block_size, total_size):
         if not self.p_bar:
             widgets = [
-                self.file_name, ': ', progressbar.Percentage(),
+                progressbar.Percentage(),
                 ' ', progressbar.Bar(),
                 ' ', progressbar.ETA(),
                 ' ', progressbar.FileTransferSpeed(),
