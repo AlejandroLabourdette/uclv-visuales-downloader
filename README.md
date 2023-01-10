@@ -34,7 +34,11 @@ This project is developed with Python3, so make sure you have it (tested with Py
 Now you are ready to go.
 
 ## Use Guide
-Open a terminal inside the project folder and execute:
+Open a terminal inside the project folder that use the virtual environment:
+``` bash
+source venv/bin/activate
+```
+Then execute:
 ``` bash
 python3 src/main.py <url>
 ```
