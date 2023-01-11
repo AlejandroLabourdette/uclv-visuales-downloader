@@ -5,6 +5,7 @@ import urllib.request
 from link_finder import get_links
 from progress_bar import DownloadProgressBar
 from constants import *
+from utils import was_already_downloaded
 
 
 @click.command()
@@ -29,9 +30,13 @@ def download(urls, onlyvideos):
                 os.makedirs(dir_to_save)
 
             click.echo(f'dwnlding: {relative_path}')
-            urllib.request.urlretrieve(
-                url_to_file, relative_path, 
-                DownloadProgressBar()) 
+            if not was_already_downloaded(url_to_file, relative_path):
+                urllib.request.urlretrieve(
+                    url_to_file, relative_path, 
+                    DownloadProgressBar())
+            else:
+                click.echo('Already downloaded')
+
 
 
 if __name__ == '__main__':
