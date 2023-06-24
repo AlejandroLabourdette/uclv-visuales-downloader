@@ -45,7 +45,7 @@ python3 src/main.py <url>
 Feel free to substitute `<url>` with the URL to the directory to be downloaded.
 > Note: The URL must point to a directory (not video, img, ... ).
 
-This command will start the download of the directory inside a folder with the same name. This folder will be placed under the project's root.
+This command will start the download of the directory inside a folder with the same name. This folder will be placed under `downloads/` in project's root.
 
 You can download more than one directory at once:
 ``` bash

@@ -23,7 +23,7 @@ def download(urls, onlyvideos):
         for link_data in links:
             url_to_file = link_data[0]
             file_name = link_data[1]
-            dir_to_save = link_data[2]
+            dir_to_save = 'downloads/' + link_data[2]
             relative_path = dir_to_save + file_name
 
             if not os.path.isdir(dir_to_save):
