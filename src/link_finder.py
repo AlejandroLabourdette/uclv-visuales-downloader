@@ -35,7 +35,7 @@ def get_links(url: str, only_videos: bool, dir_to_save='') -> Generator[ str, st
             new_url = url+link
             new_dir_to_save = dir_to_save + urllib.parse.unquote(link)
             yield from get_links(new_url, only_videos, new_dir_to_save)
-        elif link_type in [VID, IMG, TXT]:
+        elif link_type in [VID, IMG, TXT, SND]:
             if only_videos and link_type != VID:
                 continue
             url_to_file = url+link
