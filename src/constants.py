@@ -1,5 +1,5 @@
-VID = '[VID]'
-DIR = '[DIR]'
-IMG = '[IMG]'
-TXT = '[TXT]'
-SND = '[SND]'
+VID = '[VID]' # Video
+DIR = '[DIR]' # Directory
+IMG = '[IMG]' # Image
+TXT = '[TXT]' # Text
+SND = '[SND]' # Sound
