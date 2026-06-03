@@ -3,7 +3,7 @@ import urllib.parse
 
 from typing import Generator
 from bs4 import BeautifulSoup, element
-from constants import *
+from .constants import *
 
 
 def get_links(url: str, only_videos: bool, dir_to_save='') -> Generator[ str, str, str]:

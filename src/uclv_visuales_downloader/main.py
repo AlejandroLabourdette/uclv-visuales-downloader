@@ -2,10 +2,10 @@ import click
 import os
 import urllib.request
 
-from link_finder import get_links
-from progress_bar import DownloadProgressBar
-from constants import *
-from utils import was_already_downloaded
+from .link_finder import get_links
+from .progress_bar import DownloadProgressBar
+from .constants import *
+from .utils import was_already_downloaded
 
 
 @click.command()

@@ -25,13 +25,13 @@ This project requires [uv](https://docs.astral.sh/uv/getting-started/installatio
 3. To check if the program is working as expected execute:
 
     ``` bash
-    uv run python src/main.py --version
+    uv run visuales --version
     ```
 
     It should output something like:
 
     ``` bash
-    > main.py, version 0.1.0
+    > visuales, version 0.1.0
     ```
 
 Now you are ready to go.
@@ -41,7 +41,7 @@ Now you are ready to go.
 Execute commands with `uv run`:
 
 ``` bash
-uv run python src/main.py '<url>'
+uv run visuales '<url>'
 ```
 
 Feel free to substitute `<url>` with the URL to the directory to be downloaded.
@@ -55,7 +55,7 @@ This command will start the download of the directory inside a folder with the s
 You can download more than one directory at once:
 
 ``` bash
-python3 src/main.py '<url1>' '<url2>' ... '<urlN>'
+uv run visuales '<url1>' '<url2>' ... '<urlN>'
 ```
 
 Make sure to separate urls with a white space.
@@ -65,13 +65,13 @@ Make sure to separate urls with a white space.
 ## Documentation
 
 ``` bash
-python3 src/main.py --help
+uv run visuales --help
 ```
 
 The command will output all available commands and options:
 
 ``` bash
-Usage: main.py [OPTIONS] [URLS]...
+Usage: visuales [OPTIONS] [URLS]...
 
   Download full directory from specified URL's
 
