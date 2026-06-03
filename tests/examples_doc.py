@@ -111,3 +111,25 @@ html_doc2 = '''
 <address>Apache/2.4.38 (Debian) Server at visuales.uclv.cu Port 80</address>
 </body></html>
 '''
+
+html_doc3 = '''
+<html><script src="chrome-extension://jnlgamecbpmbajjfhmmmlhejkemejdma/static/js/inpage.js"></script><head>
+  <title>Index of /Series</title>
+ </head>
+ <body>
+<h1>Index of /Series</h1>
+  <table>
+   <tbody><tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
+   <tr><th colspan="5"><hr></th></tr>
+<tr><td valign="top"><img src="/icons/back.gif" alt="[PARENTDIR]"></td><td><a href="/">Parent Directory</a></td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="Completar/">Completar/</a></td><td align="right">2023-02-08 14:26  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="Cubanos/">Cubanos/</a></td><td align="right">2021-06-15 05:21  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="Espanol/">Espanol/</a></td><td align="right">2026-05-26 10:31  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="Ingles/">Ingles/</a></td><td align="right">2026-06-02 04:43  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="NETFLIX/">NETFLIX/</a></td><td align="right">2025-12-02 04:46  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+   <tr><th colspan="5"><hr></th></tr>
+</tbody></table>
+<address>Apache/2.4.57 (Debian) Server at visuales.uclv.cu Port 80</address>
+
+</body></html>
+'''

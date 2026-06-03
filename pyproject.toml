@@ -17,3 +17,9 @@ visuales = "uclv_visuales_downloader.main:download"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/uclv_visuales_downloader"]
+
+[dependency-groups]
+dev = ["pytest>=7"]
+
+[tool.pytest.ini_options]
+pythonpath = ["tests"]

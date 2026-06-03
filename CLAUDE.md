@@ -27,10 +27,10 @@ uv run visuales --help
 uv run visuales --version
 ```
 
-There is no build step, linter config, or test suite. To verify scraping logic
-manually, the `src/uclv_visuales_downloader/examples_doc.py` module holds two real captured Apache index
-pages (`html_doc1`, `html_doc2`) that can be fed to `BeautifulSoup` in a REPL,
-and `src/uclv_visuales_downloader/examples_url.py` holds sample live URLs.
+To run the test suite: `uv run pytest -v`. To verify scraping logic manually,
+`tests/examples_doc.py` holds real captured Apache index pages (`html_doc1`,
+`html_doc2`, `html_doc3`) that can be fed to `BeautifulSoup` in a REPL,
+and `tests/examples_url.py` holds sample live URLs.
 
 ## Architecture
 
@@ -67,7 +67,7 @@ The flow is a single pass: `main.download` → `link_finder.get_links` (generato
 
 `https://visuales.uclv.cu` is only accessible from within Cuba. Do not attempt
 to test live scraping or verify URLs against the real server from outside Cuban
-networks. Use the captured HTML in `src/examples_doc.py` for local testing instead.
+networks. Use the captured HTML in `tests/examples_doc.py` for local testing instead.
 
 ### Important constraints
 
