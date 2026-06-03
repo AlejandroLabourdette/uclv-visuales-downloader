@@ -65,6 +65,12 @@ The flow is a single pass: `main.download` → `link_finder.get_links` (generato
   `reporthook` to `urllib.request.urlretrieve`; it lazily builds a
   `progressbar.ProgressBar` on first call once `total_size` is known.
 
+### Network access
+
+`https://visuales.uclv.cu` is only accessible from within Cuba. Do not attempt
+to test live scraping or verify URLs against the real server from outside Cuban
+networks. Use the captured HTML in `src/examples_doc.py` for local testing instead.
+
 ### Important constraints
 
 - The target URL **must point to a directory listing**, not a file. The output
