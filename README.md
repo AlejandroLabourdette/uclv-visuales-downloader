@@ -47,7 +47,7 @@ uv run python src/main.py '<url>'
 Feel free to substitute `<url>` with the URL to the directory to be downloaded.
 
 > Note: The URL must point to a directory (not video, img, ... ).
-
+>
 > Note: Some shells can get confused with urls used as options without enclose them in quotes. That's why its advised to use `''`.
 
 This command will start the download of the directory inside a folder with the same name. This folder will be placed under `downloads/` in project's root.
