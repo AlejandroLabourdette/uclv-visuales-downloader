@@ -2,7 +2,7 @@
 An automatic downloader for `https://visuales.uclv.cu` directories
 
 ## Installation Guide
-This project is developed with Python3, so make sure you have it (tested with Python3.9.6). To install the downloader open a terminal in the folder you would like to place the repo and follow these steps:
+This project requires [uv](https://docs.astral.sh/uv/getting-started/installation/). To install the downloader open a terminal in the folder you would like to place the repo and follow these steps:
 
 1. Clone the repo and move to it: 
     ``` bash
@@ -11,20 +11,13 @@ This project is developed with Python3, so make sure you have it (tested with Py
     ``` bash
     cd uclv-visuales-downloader 
     ```
-2. Create a python virtual environment and activate it:
+2. Install dependencies:
     ``` bash
-    python3 -m venv venv
+    uv sync
     ```
+3. To check if the program is working as expected execute:
     ``` bash
-    source venv/bin/activate
-    ```
-3. Install required dependencies:
-    ``` bash
-    pip install -r requirements.txt
-    ```
-4. To check if the program is working as expected execute:
-    ``` bash
-    python3 src/main.py --version
+    uv run python src/main.py --version
     ```
     It should output something like:
      ```
@@ -34,13 +27,9 @@ This project is developed with Python3, so make sure you have it (tested with Py
 Now you are ready to go.
 
 ## Use Guide
-Open a terminal inside the project folder that use the virtual environment:
+Execute commands with `uv run`:
 ``` bash
-source venv/bin/activate
-```
-Then execute:
-``` bash
-python3 src/main.py '<url>'
+uv run python src/main.py '<url>'
 ```
 Feel free to substitute `<url>` with the URL to the directory to be downloaded.
 

@@ -10,23 +10,21 @@ HTML index pages, walks subdirectories, and downloads the underlying media files
 
 ## Commands
 
-Setup (requires Python 3, tested with 3.9 and 3.12):
+Setup (requires [uv](https://docs.astral.sh/uv/getting-started/installation/)):
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+uv sync
 ```
 
 Run:
 
 ```bash
-python3 src/main.py '<url>'                 # download one directory (quote the URL)
-python3 src/main.py '<url1>' '<url2>'        # multiple directories
-python3 src/main.py --onlyvideos '<url>'     # skip images/text/sound, videos only
-python3 src/main.py --use_urls_file          # read URLs from a file named `urls` (one per line) in cwd
-python3 src/main.py --help
-python3 src/main.py --version
+uv run python src/main.py '<url>'                 # download one directory (quote the URL)
+uv run python src/main.py '<url1>' '<url2>'        # multiple directories
+uv run python src/main.py --onlyvideos '<url>'     # skip images/text/sound, videos only
+uv run python src/main.py --use_urls_file          # read URLs from a file named `urls` (one per line) in cwd
+uv run python src/main.py --help
+uv run python src/main.py --version
 ```
 
 There is no build step, linter config, or test suite. To verify scraping logic
