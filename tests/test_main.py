@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from click.testing import CliRunner
 
@@ -7,6 +7,15 @@ from uclv_visuales_downloader.main import download
 
 runner = CliRunner()
 FAKE_LINK = ("https://x/MyDir/file.mp4", "file.mp4", "MyDir/")
+
+
+def _make_fake_session(content=b'x' * 100):
+    mock_resp = MagicMock()
+    mock_resp.iter_content.return_value = iter([content])
+    mock_resp.raise_for_status.return_value = None
+    mock_sess = MagicMock()
+    mock_sess.get.return_value = mock_resp
+    return mock_sess
 
 
 def test_basic_invocation():
@@ -37,30 +46,52 @@ def test_dir_name_derived_from_url():
 
 def test_skips_already_downloaded():
     with runner.isolated_filesystem():
+        import os
+        os.makedirs("downloads/MyDir/")
+        with open("downloads/MyDir/file.mp4", "wb") as f:
+            f.write(b"x" * 100)
+        fake_session = _make_fake_session()
         with patch("uclv_visuales_downloader.main.get_links", return_value=[FAKE_LINK]):
-            with patch("uclv_visuales_downloader.main.was_already_downloaded", return_value=True):
-                with patch("uclv_visuales_downloader.main.urllib.request.urlretrieve") as mock_retr:
+            with patch("uclv_visuales_downloader.main.get_remote_file_size", return_value=100):
+                with patch("uclv_visuales_downloader.main._make_session", return_value=fake_session):
                     runner.invoke(download, ["https://x/MyDir/"])
-    mock_retr.assert_not_called()
+    fake_session.get.assert_not_called()
 
 
 def test_downloads_when_not_present():
     with runner.isolated_filesystem():
+        fake_session = _make_fake_session()
         with patch("uclv_visuales_downloader.main.get_links", return_value=[FAKE_LINK]):
-            with patch("uclv_visuales_downloader.main.was_already_downloaded", return_value=False):
-                with patch("uclv_visuales_downloader.main.urllib.request.urlretrieve") as mock_retr:
+            with patch("uclv_visuales_downloader.main.get_remote_file_size", return_value=100):
+                with patch("uclv_visuales_downloader.main._make_session", return_value=fake_session):
                     runner.invoke(download, ["https://x/MyDir/"])
-    assert mock_retr.call_count == 1
+    assert fake_session.get.call_count == 1
 
 
 def test_creates_output_dir():
     with runner.isolated_filesystem():
+        fake_session = _make_fake_session()
         with patch("uclv_visuales_downloader.main.get_links", return_value=[FAKE_LINK]):
-            with patch("uclv_visuales_downloader.main.was_already_downloaded", return_value=False):
-                with patch("uclv_visuales_downloader.main.urllib.request.urlretrieve"):
+            with patch("uclv_visuales_downloader.main.get_remote_file_size", return_value=100):
+                with patch("uclv_visuales_downloader.main._make_session", return_value=fake_session):
                     runner.invoke(download, ["https://x/MyDir/"])
         import os
         assert os.path.isdir("downloads/MyDir/")
+
+
+def test_resumes_partial_download():
+    with runner.isolated_filesystem():
+        import os
+        os.makedirs("downloads/MyDir/")
+        with open("downloads/MyDir/file.mp4", "wb") as f:
+            f.write(b"x" * 50)
+        fake_session = _make_fake_session()
+        with patch("uclv_visuales_downloader.main.get_links", return_value=[FAKE_LINK]):
+            with patch("uclv_visuales_downloader.main.get_remote_file_size", return_value=100):
+                with patch("uclv_visuales_downloader.main._make_session", return_value=fake_session):
+                    runner.invoke(download, ["https://x/MyDir/"])
+    call_kwargs = fake_session.get.call_args
+    assert call_kwargs[1]['headers'] == {'Range': 'bytes=50-'}
 
 
 def test_use_urls_file():
