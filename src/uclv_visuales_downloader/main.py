@@ -27,7 +27,7 @@ def _make_session() -> requests.Session:
 
 
 def _download_file(session: requests.Session, url: str, path: str):
-    remote_size = get_remote_file_size(url)
+    remote_size = get_remote_file_size(url, session)
     local_size = os.stat(path).st_size if os.path.exists(path) else 0
 
     if remote_size != -1 and local_size == remote_size:
@@ -40,7 +40,7 @@ def _download_file(session: requests.Session, url: str, path: str):
         mode, initial_pos = 'ab', local_size
     # local_size > remote_size → corrupt file, rewrite from scratch
 
-    response = session.get(url, headers=headers, stream=True, timeout=30)
+    response = session.get(url, headers=headers, stream=True, timeout=60)
     response.raise_for_status()
 
     progress = DownloadProgressBar(total_size=remote_size, initial=initial_pos)
