@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup, element
 from .constants import *
 
 
-def get_links(url: str, only_videos: bool, dir_to_save='') -> Generator[ str, str, str]:
+def get_links(url: str, only_videos: bool, dir_to_save='', display=None) -> Generator[str, str, str]:
     '''
     Generator that return all downloadable links under url.
 
@@ -17,9 +17,30 @@ def get_links(url: str, only_videos: bool, dir_to_save='') -> Generator[ str, st
     '''
     html_doc = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html_doc, 'html.parser')
-    
+
     table_rows = soup.find_all('tr')
+
+    # Pre-scan the already-parsed in-memory rows to collect directory metadata
+    # (no extra HTTP requests are made here)
+    files_in_dir = []
+    subdirs_in_dir = []
     tr: element.Tag
+    for tr in table_rows:
+        table_data = tr.find_all('td')
+        if len(table_data) == 0:
+            continue
+        link_type = table_data[0].img.get('alt')
+        link = table_data[1].a.get('href')
+        if link_type == DIR:
+            subdirs_in_dir.append(urllib.parse.unquote(link))
+        elif link_type in [VID, IMG, TXT, SND]:
+            if only_videos and link_type != VID:
+                continue
+            files_in_dir.append(link)
+
+    if display:
+        display.on_directory_entered(dir_to_save, len(files_in_dir), subdirs_in_dir)
+
     for tr in table_rows:
         table_data = tr.find_all('td')
         if len(table_data) == 0:
@@ -32,12 +53,12 @@ def get_links(url: str, only_videos: bool, dir_to_save='') -> Generator[ str, st
         link = td1.a.get('href')
 
         if link_type == DIR:
-            new_url = url+link
+            new_url = url + link
             new_dir_to_save = dir_to_save + urllib.parse.unquote(link)
-            yield from get_links(new_url, only_videos, new_dir_to_save)
+            yield from get_links(new_url, only_videos, new_dir_to_save, display)
         elif link_type in [VID, IMG, TXT, SND]:
             if only_videos and link_type != VID:
                 continue
-            url_to_file = url+link
+            url_to_file = url + link
             file_name = urllib.parse.unquote(link)
             yield url_to_file, file_name, dir_to_save
